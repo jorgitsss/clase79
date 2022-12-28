@@ -1,0 +1,33 @@
+<div id="<%= dom_id article %>">
+  <p>
+    <%= link_to article do %>
+      <% if article.photo.attached? %>
+        <%= image_tag article.photo.variant(:thumb) %>
+      <% else %>
+        <%= image_tag 'perro_base.jpg' %>
+      <% end %>
+    <% end %>
+  </p>
+  <p>
+    <% article.images.each do |image| %>
+      <%= image_tag image.variant(resize_to_fill: [100, 100]) %>
+    <% end %>
+  </p>
+  <p>
+    <strong>Name:</strong>
+    <%= article.name %>
+  </p>
+  <p>
+    <strong>Documento:</strong>
+    <%= article.documento %>
+    <%= link_to 'download', rails_blob_path(article.documento, disposition: "attachment") %>
+  </p>
+  <p>
+    <strong>Description:</strong>
+    <%= article.description %>
+  </p>
+  <p>
+    <strong>Author:</strong>
+    <%= article.author %>
+  </p>
+</div>
